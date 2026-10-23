@@ -1,0 +1,12 @@
+# Local API keys — never commit
+Config/Secrets.xcconfig
+
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# SwiftPM
+BacklogCore/.build/
+
+.DS_Store
