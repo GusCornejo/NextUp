@@ -21,8 +21,9 @@ struct MyApp: App {
             )
             preconditionFailure(
                 """
-                Next Up could not create its local SwiftData store.
-                Check disk space and app sandbox file access, then relaunch.
+                Next Up could not create its SwiftData store (CloudKit private DB).
+                Confirm iCloud is signed in, CloudKit capability is enabled for this
+                App ID, and the iCloud container matches the entitlements.
                 Underlying error: \(error)
                 """
             )
@@ -36,11 +37,14 @@ struct MyApp: App {
         .modelContainer(container)
     }
 
+    /// Local SwiftData store mirrored to the user's private CloudKit database.
     private static func makeModelContainer() throws -> ModelContainer {
         let schema = Schema([BacklogItem.self])
         let configuration = ModelConfiguration(
+            "NextUp",
             schema: schema,
-            isStoredInMemoryOnly: false
+            isStoredInMemoryOnly: false,
+            cloudKitDatabase: .automatic
         )
         return try ModelContainer(for: schema, configurations: [configuration])
     }

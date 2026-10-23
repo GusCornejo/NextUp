@@ -50,7 +50,7 @@ public enum ItemStatus: String, Codable, CaseIterable, Sendable, Hashable {
 
 /// A single media item in the prioritized backlog.
 ///
-/// SwiftData `@Model` shaped for CloudKit private DB later:
+/// SwiftData `@Model` for CloudKit private-database sync:
 /// every stored property has a default or is optional, and nothing uses
 /// `@Attribute(.unique)`. Category/status are stored as raw strings for
 /// CloudKit compatibility; use `category` / `status` computed accessors.
