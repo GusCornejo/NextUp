@@ -21,9 +21,7 @@ struct MyApp: App {
             )
             preconditionFailure(
                 """
-                Next Up could not create its SwiftData store (CloudKit private DB).
-                Confirm iCloud is signed in, CloudKit capability is enabled for this
-                App ID, and the iCloud container matches the entitlements.
+                Next Up could not create its local SwiftData store.
                 Underlying error: \(error)
                 """
             )
@@ -37,14 +35,19 @@ struct MyApp: App {
         .modelContainer(container)
     }
 
-    /// Local SwiftData store mirrored to the user's private CloudKit database.
+    /// Local-only SwiftData store (Personal Team cannot use CloudKit).
+    ///
+    /// When on a **paid** Apple Developer Program team, re-enable sync by:
+    /// 1. Adding iCloud (CloudKit) + Push / remote-notification capabilities
+    ///    (container `iCloud.com.guscornejo.NextUp`).
+    /// 2. Changing `cloudKitDatabase:` below from `.none` to `.automatic`.
     private static func makeModelContainer() throws -> ModelContainer {
         let schema = Schema([BacklogItem.self])
         let configuration = ModelConfiguration(
             "NextUp",
             schema: schema,
             isStoredInMemoryOnly: false,
-            cloudKitDatabase: .automatic
+            cloudKitDatabase: .none
         )
         return try ModelContainer(for: schema, configurations: [configuration])
     }
