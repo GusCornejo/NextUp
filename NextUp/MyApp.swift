@@ -4,7 +4,7 @@ import OSLog
 import BacklogCore
 
 private let appLogger = Logger(
-    subsystem: "devplaceholder.NextUp",
+    subsystem: "com.guscornejo.NextUp",
     category: "App"
 )
 

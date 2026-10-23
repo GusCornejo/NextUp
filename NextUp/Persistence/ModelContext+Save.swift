@@ -3,7 +3,7 @@ import OSLog
 import SwiftData
 
 private let persistenceLogger = Logger(
-    subsystem: "devplaceholder.NextUp",
+    subsystem: "com.guscornejo.NextUp",
     category: "Persistence"
 )
 
